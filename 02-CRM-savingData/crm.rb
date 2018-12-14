@@ -7,7 +7,6 @@ class CRM
   end
 
   def main_menu
-
     while true # repeat indefinitely
       print_main_menu
       user_selected = gets.to_i
