@@ -58,29 +58,27 @@ class CRM
     id = gets.to_i
 
     puts "What do you wanna update?"
-    attribute = gets.chomp
+    attribute = gets.chomp.to_sym
 
     puts "Whats the new #{attribute}"
     value = gets.chomp
 
-    contact = Contact.find(id).first
+    contact = Contact.find(id)
 
-    contact.update(attribute, value)
+    contact.update(attribute => value)
+
+    display_contact(contact)
 
   end
 
   def delete_contact
 
-    print "Provide contact ID please"
+    puts "Provide contact ID please"
     id = gets.to_i
+    contact = Contact.find(id)
+    contact.destroy
 
-  end
-
-  def display_contact(contact)
-    puts " Name: #{contact.full_name}"
-    puts " email: #{contact.email}"
-    puts " Note: #{contact.note}"
-    puts
+    display_all_contacts
   end
 
   def display_all_contacts
@@ -129,6 +127,15 @@ class CRM
 
   end
 
+  private
+
+  def display_contact(contact)
+    puts
+    puts " Name: #{contact.full_name}"
+    puts " email: #{contact.email}"
+    puts " Note: #{contact.note}"
+    puts
+  end
 
 end
 
